@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5000 Windows</title>
+  <script>
+    function openWindowsWithFullscreen() {
+      const targetURL = "https://i.namu.wiki/i/2wT0VKuqpZFb7KtizqkNttjtLKyXE1M0INkVh46Vg12akKbOQdIG6MET3G3JqtU-DxnMlP8nJihCMOhbYvP_Lw.webp"; // 원하는 사이트 URL
+      const totalWindows = 5000; // 열 창 개수
+      let openedWindows = 0; // 현재 연 창 개수
+      
+      for (let i = 0; i < totalWindows; i++) {
+        const newWindow = window.open(targetURL, "_blank", "width=800,height=600");
+        if (newWindow) {
+          openedWindows++;
+
+          // 새 창이 열리면 전체화면 시도 (사용자 상호작용 필요)
+          newWindow.document.addEventListener("DOMContentLoaded", () => {
+            try {
+              newWindow.document.documentElement.requestFullscreen();
+            } catch (err) {
+              console.log("Fullscreen failed for window:", i + 1);
+            }
+          });
+        } else {
+          console.log("창 열기 실패:", i + 1);
+          break; // 팝업 차단기 작동 시 루프 중지
+        }
+      }
+      console.log(`총 ${openedWindows}개의 창이 열렸습니다.`);
+    }
+
+    // 페이지 로드 후 실행
+    window.onload = openWindowsWithFullscreen;
+  </script>
+</head>
+<body>
+  <h1>5000개 창 열기</h1>
+</body>
+</html>
